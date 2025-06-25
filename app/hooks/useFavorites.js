@@ -23,5 +23,5 @@ export function useFavorites() {
 
   const isFavorite = (itemId) => favorites[itemId] || false;
 
-  return { favorites, toggleFavorite, isFavorite };
+  return { isFavorite, toggleFavorite };
 } 
