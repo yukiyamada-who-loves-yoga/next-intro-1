@@ -32,11 +32,10 @@ export default function DetailPage({ params }) {
 
   return (
     <div>
-      <h1>{item.title}</h1>
-      
       <div>
+        <h1>{item.title}</h1>
         <button onClick={handleFavoriteToggle}>
-          {isFavorite ? '❤️ お気に入り済み' : '🤍 お気に入りに追加'}
+          {isFavorite ? '❤️' : '🤍'}
         </button>
       </div>
 
