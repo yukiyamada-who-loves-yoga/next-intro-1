@@ -5,12 +5,7 @@ import Link from 'next/link';
 import { items } from './data.js';
 
 export default function Page() {
-  const [count, setCount] = useState(0);
   const [selectedItem, setSelectedItem] = useState(null);
-
-  const handleIncrement = () => {
-    setCount(count + 1);
-  };
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -19,12 +14,6 @@ export default function Page() {
   return (
     <div>
       <h1>日本食一覧</h1>
-      
-      <div>
-        <h3>訪問回数カウンター</h3>
-        <p>カウント: {count}</p>
-        <button onClick={handleIncrement}>カウントアップ</button>
-      </div>
 
       {selectedItem && (
         <div>
