@@ -1,26 +1,17 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { items } from './data.js';
+import { useFavorites } from './hooks/useFavorites.js';
+import FavoriteButton from './components/FavoriteButton.js';
+import { APP_TITLE } from './constants.js';
 
 export default function Page() {
-  const [selectedItem, setSelectedItem] = useState(null);
-
-  const handleItemClick = (item) => {
-    setSelectedItem(item);
-  };
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   return (
     <div>
-      <h1>日本食一覧</h1>
-
-      {selectedItem && (
-        <div>
-          <h3>選択された料理: {selectedItem.title}</h3>
-          <p>{selectedItem.detail}</p>
-        </div>
-      )}
+      <h1>{APP_TITLE}</h1>
 
       <ol>
         {items.map((item) => (
@@ -28,9 +19,10 @@ export default function Page() {
             <Link href={`/detail/${item.id}`}>
               {item.title}
             </Link>
-            <button onClick={() => handleItemClick(item)}>
-              詳細を表示
-            </button>
+            <FavoriteButton 
+              isFavorite={isFavorite(item.id)}
+              onClick={() => toggleFavorite(item.id)}
+            />
           </li>
         ))}
       </ol>

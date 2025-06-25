@@ -1,8 +1,9 @@
 import "./globals.css";
+import { APP_TITLE, APP_DESCRIPTION } from './constants.js';
 
 export const metadata = {
-  title: "日本食一覧",
-  description: "日本の伝統料理とその特徴を紹介するアプリケーション",
+  title: APP_TITLE,
+  description: APP_DESCRIPTION,
 };
 
 export default function RootLayout({ children }) {

@@ -1,31 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { use } from 'react';
 import Link from 'next/link';
 import { items } from '../../data.js';
+import { useFavorites } from '../../hooks/useFavorites.js';
+import FavoriteButton from '../../components/FavoriteButton.js';
+import { ERROR_MESSAGE, BACK_TO_LIST } from '../../constants.js';
 
 export default function DetailPage({ params }) {
-  const [item, setItem] = useState(null);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    const getItem = async () => {
-      const { id } = await params;
-      const foundItem = items.find(item => item.id == id);
-      setItem(foundItem);
-    };
-    getItem();
-  }, [params]);
-
-  const handleFavoriteToggle = () => {
-    setIsFavorite(!isFavorite);
-  };
+  const { id } = use(params);
+  const item = items.find(item => item.id == id);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   if (!item) {
     return (
       <div>
-        <h1>料理が見つかりません</h1>
-        <Link href="/">一覧に戻る</Link>
+        <h1>{ERROR_MESSAGE}</h1>
+        <Link href="/">{BACK_TO_LIST}</Link>
       </div>
     );
   }
@@ -34,14 +25,15 @@ export default function DetailPage({ params }) {
     <div>
       <div>
         <h1>{item.title}</h1>
-        <button onClick={handleFavoriteToggle}>
-          {isFavorite ? '❤️' : '🤍'}
-        </button>
+        <FavoriteButton 
+          isFavorite={isFavorite(id)}
+          onClick={() => toggleFavorite(id)}
+        />
       </div>
 
       <p>{item.detail}</p>
 
-      <Link href="/">一覧に戻る</Link>
+      <Link href="/">{BACK_TO_LIST}</Link>
     </div>
   );
 } 
