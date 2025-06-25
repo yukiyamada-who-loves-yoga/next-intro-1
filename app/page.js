@@ -20,16 +20,14 @@ export default function Page() {
     <div>
       <h1>日本食一覧</h1>
       
-      {/* インタラクティブなカウンター */}
-      <div style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
+      <div>
         <h3>訪問回数カウンター</h3>
         <p>カウント: {count}</p>
         <button onClick={handleIncrement}>カウントアップ</button>
       </div>
 
-      {/* 選択されたアイテムの表示 */}
       {selectedItem && (
-        <div style={{ marginBottom: '20px', padding: '10px', backgroundColor: '#f0f0f0' }}>
+        <div>
           <h3>選択された料理: {selectedItem.title}</h3>
           <p>{selectedItem.detail}</p>
         </div>
@@ -41,10 +39,7 @@ export default function Page() {
             <Link href={`/detail/${item.id}`}>
               {item.title}
             </Link>
-            <button 
-              onClick={() => handleItemClick(item)}
-              style={{ marginLeft: '10px', padding: '5px 10px' }}
-            >
+            <button onClick={() => handleItemClick(item)}>
               詳細を表示
             </button>
           </li>
