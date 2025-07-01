@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { items } from './data.js';
-import { useFavorites } from './hooks/useFavorites.js';
-import FavoriteButton from './components/FavoriteButton.js';
-import { APP_TITLE } from './constants.js';
+import { items } from './data';
+import { useFavorites } from './hooks/useFavorites';
+import FavoriteButton from './components/FavoriteButton';
+import { APP_TITLE } from './constants';
 
 export default function Page() {
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -28,4 +28,4 @@ export default function Page() {
       </ol>
     </div>
   );
-}
+} 

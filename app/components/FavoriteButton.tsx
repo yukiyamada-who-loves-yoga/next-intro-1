@@ -1,4 +1,10 @@
-export default function FavoriteButton({ isFavorite, onClick }) {
+// お気に入りボタンのProps型定義
+interface FavoriteButtonProps {
+  isFavorite: boolean;
+  onClick: () => void;
+}
+
+export default function FavoriteButton({ isFavorite, onClick }: FavoriteButtonProps) {
   return (
     <button 
       onClick={onClick}

@@ -1,4 +1,12 @@
-export const items = [
+// アイテムの型定義
+export interface Item {
+  id: number;
+  title: string;
+  detail: string;
+}
+
+// アイテムデータ
+export const items: Item[] = [
   { 
     id: 1, 
     title: "寿司",
