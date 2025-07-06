@@ -1,8 +1,6 @@
 import "./globals.css";
 import { ReactNode } from 'react';
 
-
-
 // RootLayoutのProps型定義
 interface RootLayoutProps {
   children: ReactNode;
