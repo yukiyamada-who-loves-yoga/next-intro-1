@@ -33,16 +33,16 @@ next-intro/
 
 ### 1.1 プロジェクトの作成
 
-```bash
+~~~bash~terminal
 npx create-next-app@latest next-intro --typescript --tailwind=false --eslint=false --app --src-dir=false --import-alias="@/*"
 cd next-intro
-```
+~~~
 
 ### 1.2 依存関係の確認
 
 `package.json`の主要な依存関係：
 
-```json
+~~~json~package.json
 {
   "dependencies": {
     "next": "15.3.4",
@@ -56,7 +56,7 @@ cd next-intro
     "typescript": "^5"
   }
 }
-```
+~~~
 
 ## ステップ2: 基本的なページ構造の作成
 
@@ -64,7 +64,7 @@ cd next-intro
 
 `app/layout.tsx`を作成します：
 
-```typescript
+~~~typescript~app/layout.tsx
 import "./globals.css";
 import { ReactNode } from 'react';
 
@@ -84,7 +84,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
-```
+~~~
 
 **ポイント**:
 - `interface`を使用してPropsの型を定義
@@ -95,7 +95,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
 `app/page.tsx`を作成します：
 
-```typescript
+~~~typescript~app/page.tsx
 // アイテムの型定義
 interface Item {
   id: number;
@@ -130,7 +130,7 @@ export default function Page() {
     </div>
   );
 }
-```
+~~~
 
 **ポイント**:
 - `interface Item`でデータ構造を定義
@@ -144,7 +144,7 @@ export default function Page() {
 
 TypeScriptでは、データの構造を事前に定義することで、開発時のエラーを防ぎます。
 
-```typescript
+~~~typescript~example
 // 良い例：明確な型定義
 interface Item {
   id: number;
@@ -156,11 +156,11 @@ interface Item {
 const items = [
   { id: 1, name: "寿司", desc: "..." }
 ];
-```
+~~~
 
 ### 3.2 interface vs type
 
-```typescript
+~~~typescript~example
 // interface（推奨）：オブジェクトの構造を定義
 interface Item {
   id: number;
@@ -172,11 +172,11 @@ interface Item {
 type ItemId = number;
 type ItemName = string;
 type ItemArray = Item[];
-```
+~~~
 
 ### 3.3 プロパティ名の命名規則
 
-```typescript
+~~~typescript~example
 // 良い例：明確で簡潔
 interface Item {
   id: number;      // 識別子
@@ -189,15 +189,15 @@ interface Item {
   title: string;   // 何のタイトル？
   detail: string;  // 何の詳細？
 }
-```
+~~~
 
 ## ステップ4: アプリケーションの実行
 
 ### 4.1 開発サーバーの起動
 
-```bash
+~~~bash~terminal
 npm run dev
-```
+~~~
 
 ### 4.2 アクセス確認
 
@@ -243,7 +243,7 @@ npm run dev
 
 新しい料理を追加してみましょう：
 
-```typescript
+~~~typescript~app/page.tsx
 const items: Item[] = [
   { 
     id: 1, 
@@ -261,13 +261,13 @@ const items: Item[] = [
     desc: "魚介類や野菜を衣で包んで揚げた料理。"
   }
 ];
-```
+~~~
 
 ### 6.2 スタイリングの追加
 
 `app/globals.css`にスタイルを追加：
 
-```css
+~~~css~app/globals.css
 body {
   font-family: 'Arial', sans-serif;
   max-width: 800px;
@@ -291,7 +291,7 @@ li {
   background-color: #f5f5f5;
   border-radius: 5px;
 }
-```
+~~~
 
 ## まとめ
 
@@ -327,7 +327,7 @@ li {
 
 ### デバッグ方法
 
-```bash
+~~~bash~terminal
 # 型チェック
 npx tsc --noEmit
 
@@ -336,7 +336,7 @@ npm run build
 
 # 開発サーバー再起動
 npm run dev
-```
+~~~
 
 ---
 
