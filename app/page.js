@@ -4,14 +4,13 @@ import Link from 'next/link';
 import { items } from './data.js';
 import { useFavorites } from './hooks/useFavorites.js';
 import FavoriteButton from './components/FavoriteButton.js';
-import { APP_TITLE } from './constants.js';
 
 export default function Page() {
   const { isFavorite, toggleFavorite } = useFavorites();
 
   return (
     <div>
-      <h1>{APP_TITLE}</h1>
+      <h1>日本食一覧</h1>
 
       <ol>
         {items.map((item) => (
