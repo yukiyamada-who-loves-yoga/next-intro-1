@@ -27,7 +27,7 @@ export default function Page() {
 
   return (
     <div>
-      <h1>日本食一覧</h1>
+      {/* <h1>日本食一覧</h1> */}
 
       <ol>
         {items.map((item) => (
