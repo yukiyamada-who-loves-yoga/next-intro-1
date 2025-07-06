@@ -1,4 +1,12 @@
-export const items = [
+// アイテムの型定義
+export interface Item {
+  id: number;
+  title: string;
+  detail: string;
+}
+
+// アイテムデータ
+export const items: Item[] = [
   { 
     id: 1, 
     title: "寿司",
@@ -25,5 +33,3 @@ export const items = [
     detail: "キャベツや肉、魚介類を小麦粉の生地に混ぜて焼いた料理。"
   }
 ]; 
-
-
