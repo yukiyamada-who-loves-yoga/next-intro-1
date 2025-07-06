@@ -30,7 +30,7 @@ export default function DetailPage({ params }: DetailPageParams) {
     <div>
       <div>
         <h1>{item.title}</h1>
-        <FavoriteButton 
+        <FavoriteButton
           isFavorite={isFavorite(parseInt(id))}
           onClick={() => toggleFavorite(parseInt(id))}
         />
