@@ -6,18 +6,9 @@ interface Item {
 
 // アイテムデータ
 const items: Item[] = [
-  {
-    id: 1,
-    name: "寿司",
-  },
-  {
-    id: 2,
-    name: "ラーメン",
-  },
-  {
-    id: 3,
-    name: "天ぷら",
-  }
+  { id: 1, name: "寿司" },
+  { id: 2, name: "ラーメン" },
+  { id: 3, name: "天ぷら" }
 ];
 
 export default function Page() {
