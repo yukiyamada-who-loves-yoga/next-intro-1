@@ -11,7 +11,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="ja">
       <body>
         <h1>日本食一覧</h1>
-        <p>日本の伝統料理とその特徴を紹介するアプリケーション</p>
+        <p>日本の伝統料理とその特徴を紹介するアプリ</p>
         {children}
       </body>
     </html>
