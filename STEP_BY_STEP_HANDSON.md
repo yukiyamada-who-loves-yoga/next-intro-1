@@ -1,70 +1,66 @@
-# Next.js 15.3.4 + TypeScript ハンズオン教材
+# Next.js 15.3.4 + React 19 + TypeScript ハンズオン教材
 
-## 概要
+**作成日**: 2025年7月6日  
+**対象バージョン**: Next.js 15.3.4, React 19, TypeScript 5.x  
+**学習時間**: 約30分
 
-このハンズオンでは、Next.js 15.3.4とTypeScriptを使用して、日本食紹介アプリケーションを構築します。App Routerを使用し、最小限の構成でTypeScriptの基本を学びます。
+## 📋 プロジェクト概要
 
-**対象者**: Next.jsとTypeScriptの基礎を学びたい方
-**所要時間**: 約30分
-**前提知識**: HTML、CSS、JavaScriptの基礎知識
+このハンズオンでは、Next.js 15.3.4とReact 19を使った最小限の日本食紹介アプリを作成します。TypeScriptを使用し、App Routerを採用した最新の構成で学習します。
 
-## 技術スタック
+### 🎯 学習目標
+- Next.js 15.3.4の基本概念を理解する
+- App Routerの使い方を習得する
+- TypeScriptの基本的な型定義を学ぶ
+- コンポーネントベースの開発を体験する
 
-- **Next.js**: 15.3.4（最新版）
-- **React**: 19
-- **TypeScript**: 5.x
-- **App Router**: Next.js 13以降の新しいルーティングシステム
+## 🚀 プロジェクト構成
 
-## プロジェクト構成
+現在のプロジェクト構成：
 
 ```
 next-intro/
 ├── app/
-│   ├── page.tsx          # メインページ（日本食一覧）
-│   ├── layout.tsx        # ルートレイアウト
-│   ├── globals.css       # グローバルスタイル
-│   └── favicon.ico       # ファビコン
-├── tsconfig.json         # TypeScript設定
-├── package.json          # 依存関係
-└── README.md            # プロジェクト説明
+│   ├── layout.tsx      # ルートレイアウト
+│   ├── page.tsx        # メインページ
+│   ├── globals.css     # グローバルスタイル
+│   └── favicon.ico     # ファビコン
+├── package.json        # 依存関係
+├── tsconfig.json       # TypeScript設定
+└── README.md          # プロジェクト説明
 ```
 
-## ステップ1: プロジェクトの初期化
+## 📦 依存関係
 
-### 1.1 プロジェクトの作成
+**実行時点の最新バージョン**:
+- Next.js: 15.3.4（最新版）
+- React: 19.0.0（最新版）
+- TypeScript: 5.8.3（最新版）
 
-~~~bash~terminal
-npx create-next-app@latest next-intro --typescript --tailwind=false --eslint=false --app --src-dir=false --import-alias="@/*"
-cd next-intro
+**参照した公式ドキュメント**:
+- [Next.js App Router Documentation](https://nextjs.org/docs/app/building-your-application/upgrading/from-vite)
+- [Next.js TypeScript Configuration](https://nextjs.org/docs/app/getting-started/installation)
+- [TypeScript React Configuration](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+
+## 🛠️ セットアップ手順
+
+### 1. プロジェクトの起動
+
+~~~bash filename="Terminal"
+npm run dev
 ~~~
 
-### 1.2 依存関係の確認
+開発サーバーが起動し、`http://localhost:3000`でアプリケーションにアクセスできます。
 
-`package.json`の主要な依存関係：
+### 2. プロジェクト構造の確認
 
-~~~json~package.json
-{
-  "dependencies": {
-    "next": "15.3.4",
-    "react": "^19",
-    "react-dom": "^19"
-  },
-  "devDependencies": {
-    "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "typescript": "^5"
-  }
-}
-~~~
+現在のプロジェクトは最小限の構成で、以下のファイルが含まれています：
 
-## ステップ2: 基本的なページ構造の作成
+## 📁 ファイル詳細
 
-### 2.1 ルートレイアウトの作成
+### app/layout.tsx - ルートレイアウト
 
-`app/layout.tsx`を作成します：
-
-~~~typescript~app/layout.tsx
+~~~tsx filename="app/layout.tsx"
 import "./globals.css";
 import { ReactNode } from 'react';
 
@@ -78,7 +74,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="ja">
       <body>
         <h1>日本食一覧</h1>
-        <p>日本の伝統料理とその特徴を紹介するアプリケーション</p>
+        <p>日本の伝統料理とその特徴を紹介するアプリ</p>
         {children}
       </body>
     </html>
@@ -87,34 +83,25 @@ export default function RootLayout({ children }: RootLayoutProps) {
 ~~~
 
 **ポイント**:
-- `interface`を使用してPropsの型を定義
+- `interface RootLayoutProps`でPropsの型を定義
 - `ReactNode`型でchildrenの型を指定
 - 日本語のlang属性を設定
+- グローバルCSSをインポート
 
-### 2.2 メインページの作成
+### app/page.tsx - メインページ
 
-`app/page.tsx`を作成します：
-
-~~~typescript~app/page.tsx
+~~~tsx filename="app/page.tsx"
 // アイテムの型定義
 interface Item {
   id: number;
   name: string;
-  desc: string;
 }
 
 // アイテムデータ
 const items: Item[] = [
-  { 
-    id: 1, 
-    name: "寿司",
-    desc: "酢飯に魚介類や野菜を乗せた日本の伝統料理。"
-  },
-  { 
-    id: 2, 
-    name: "ラーメン",
-    desc: "中華麺をスープで煮込んだ日本の国民食。"
-  }
+  { id: 1, name: "寿司" },
+  { id: 2, name: "ラーメン" },
+  { id: 3, name: "天ぷら" }
 ];
 
 export default function Page() {
@@ -133,213 +120,198 @@ export default function Page() {
 ~~~
 
 **ポイント**:
-- `interface Item`でデータ構造を定義
-- 配列の型注釈: `Item[]`
+- `interface Item`でデータ構造の型を定義
+- 配列の型注釈`Item[]`を使用
 - `map`関数でリストをレンダリング
 - `key`プロパティでReactの最適化をサポート
 
-## ステップ3: TypeScriptの基本概念
+### app/globals.css - グローバルスタイル
 
-### 3.1 型定義の重要性
-
-TypeScriptでは、データの構造を事前に定義することで、開発時のエラーを防ぎます。
-
-~~~typescript~example
-// 良い例：明確な型定義
-interface Item {
-  id: number;
-  name: string;
-  desc: string;
-}
-
-// 悪い例：型定義なし
-const items = [
-  { id: 1, name: "寿司", desc: "..." }
-];
-~~~
-
-### 3.2 interface vs type
-
-~~~typescript~example
-// interface（推奨）：オブジェクトの構造を定義
-interface Item {
-  id: number;
-  name: string;
-  desc: string;
-}
-
-// type：より複雑な型定義に使用
-type ItemId = number;
-type ItemName = string;
-type ItemArray = Item[];
-~~~
-
-### 3.3 プロパティ名の命名規則
-
-~~~typescript~example
-// 良い例：明確で簡潔
-interface Item {
-  id: number;      // 識別子
-  name: string;    // 名前
-  desc: string;    // 説明（descriptionの短縮）
-}
-
-// 避けるべき例：曖昧な名前
-interface Item {
-  title: string;   // 何のタイトル？
-  detail: string;  // 何の詳細？
-}
-~~~
-
-## ステップ4: アプリケーションの実行
-
-### 4.1 開発サーバーの起動
-
-~~~bash~terminal
-npm run dev
-~~~
-
-### 4.2 アクセス確認
-
-ブラウザで http://localhost:3000 にアクセスして、以下の内容が表示されることを確認：
-
-- ページタイトル: "日本食一覧"
-- 説明文: "日本の伝統料理とその特徴を紹介するアプリケーション"
-- 番号付きリスト:
-  1. 寿司
-  2. ラーメン
-
-## ステップ5: コードの理解
-
-### 5.1 ファイル構造の説明
-
-**App Routerの特徴**:
-- `app/`ディレクトリがルート
-- `page.tsx`がルートページ（`/`）
-- `layout.tsx`が全ページの共通レイアウト
-
-### 5.2 コンポーネントの役割
-
-**RootLayout**:
-- HTMLの基本構造を提供
-- 全ページで共通のヘッダーを表示
-- グローバルスタイルを適用
-
-**Page**:
-- メインコンテンツを表示
-- データを配列から取得
-- リスト形式で表示
-
-### 5.3 TypeScriptの利点
-
-1. **型安全性**: コンパイル時にエラーを検出
-2. **開発効率**: IDEの自動補完機能
-3. **保守性**: コードの意図が明確
-4. **リファクタリング**: 安全な変更が可能
-
-## ステップ6: 発展的な学習
-
-### 6.1 データの追加
-
-新しい料理を追加してみましょう：
-
-~~~typescript~app/page.tsx
-const items: Item[] = [
-  { 
-    id: 1, 
-    name: "寿司",
-    desc: "酢飯に魚介類や野菜を乗せた日本の伝統料理。"
-  },
-  { 
-    id: 2, 
-    name: "ラーメン",
-    desc: "中華麺をスープで煮込んだ日本の国民食。"
-  },
-  { 
-    id: 3, 
-    name: "天ぷら",
-    desc: "魚介類や野菜を衣で包んで揚げた料理。"
-  }
-];
-~~~
-
-### 6.2 スタイリングの追加
-
-`app/globals.css`にスタイルを追加：
-
-~~~css~app/globals.css
+~~~css filename="app/globals.css"
 body {
-  font-family: 'Arial', sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 20px;
+}
+~~~
+
+**ポイント**:
+- 基本的なフォントとマージンを設定
+- `layout.tsx`でインポートされ、全体に適用
+
+## 🔧 TypeScriptの基本概念
+
+### 1. Interface（インターフェース）
+
+Propsやデータ構造の型定義に使用：
+
+~~~tsx
+interface Item {
+  id: number;
+  name: string;
+}
+~~~
+
+### 2. 型注釈
+
+変数や関数の引数に型を指定：
+
+~~~tsx
+const items: Item[] = [...];
+function RootLayout({ children }: RootLayoutProps) { ... }
+~~~
+
+### 3. ジェネリック型
+
+Reactの組み込み型を使用：
+
+~~~tsx
+import { ReactNode } from 'react';
+interface RootLayoutProps {
+  children: ReactNode;
+}
+~~~
+
+## 🎨 スタイリング
+
+### 基本的なCSS
+
+現在のアプリケーションには最小限のスタイルが適用されています：
+
+- フォント: Arial, Helvetica, sans-serif
+- マージン: 20px
+
+### カスタムスタイルの追加
+
+必要に応じて`globals.css`にスタイルを追加できます：
+
+~~~css filename="app/globals.css"
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 20px;
+  background-color: #f5f5f5;
 }
 
 h1 {
   color: #333;
-  border-bottom: 2px solid #007acc;
+  text-align: center;
 }
 
 ol {
-  list-style-type: decimal;
-  padding-left: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 li {
-  margin: 10px 0;
   padding: 10px;
-  background-color: #f5f5f5;
-  border-radius: 5px;
+  margin: 5px 0;
+  border-bottom: 1px solid #eee;
 }
 ~~~
 
-## まとめ
+## 🚀 開発サーバーの起動
 
-このハンズオンで学んだこと：
+~~~bash filename="Terminal"
+npm run dev
+~~~
 
-1. **Next.js 15.3.4**の基本設定
-2. **App Router**の使用方法
-3. **TypeScript**の型定義
-4. **interface**の活用
-5. **コンポーネント**の作成方法
+**出力例**:
+```
+> next-intro@0.1.0 dev
+> next dev --turbopack
+   ▲ Next.js 15.3.4 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://10.162.174.19:3000
+ ✓ Starting...
+ ✓ Ready in 543ms
+```
 
-### 次のステップ
+## 🔍 動作確認
 
-- 詳細ページの追加
-- お気に入り機能の実装
-- データベース連携
-- APIルートの作成
-- 認証機能の追加
+1. ブラウザで`http://localhost:3000`にアクセス
+2. 「日本食一覧」のタイトルが表示される
+3. 寿司、ラーメン、天ぷらのリストが表示される
 
-## 参考資料
+## 📚 学習のポイント
 
-- [Next.js公式ドキュメント](https://nextjs.org/docs)
-- [TypeScript公式ドキュメント](https://www.typescriptlang.org/docs)
-- [React公式ドキュメント](https://react.dev)
+### Next.js 15.3.4の特徴
+- **App Router**: ファイルベースのルーティング
+- **Server Components**: デフォルトでサーバーサイドレンダリング
+- **Turbopack**: 高速な開発サーバー
+- **TypeScript**: 組み込みサポート
 
-## トラブルシューティング
+### React 19の特徴
+- **React Compiler**: 自動最適化
+- **Actions**: フォーム処理の改善
+- **Document Metadata**: メタデータの改善
 
-### よくあるエラー
+### TypeScriptの利点
+- **型安全性**: コンパイル時のエラー検出
+- **開発体験**: 自動補完とリファクタリング
+- **保守性**: コードの可読性向上
 
-1. **型エラー**: `tsconfig.json`の設定を確認
-2. **コンパイルエラー**: 依存関係の再インストール
-3. **表示エラー**: ブラウザのキャッシュクリア
+## 🛠️ トラブルシューティング
+
+### よくある問題
+
+1. **TypeScriptエラー**
+   - `tsconfig.json`の設定を確認
+   - 型定義を適切に追加
+
+2. **開発サーバーが起動しない**
+   - ポート3000が使用中の場合、別のポートを指定
+   - 依存関係を再インストール
+
+3. **スタイルが適用されない**
+   - `globals.css`が`layout.tsx`でインポートされているか確認
 
 ### デバッグ方法
 
-~~~bash~terminal
+~~~bash filename="Terminal"
 # 型チェック
 npx tsc --noEmit
 
 # ビルドテスト
 npm run build
-
-# 開発サーバー再起動
-npm run dev
 ~~~
 
----
+## 📖 次のステップ
 
-**作成日**: 2025年7月6日  
-**バージョン**: Next.js 15.3.4  
-**対象**: TypeScript初心者向け 
+このハンズオンを完了後、以下の機能を追加できます：
+
+1. **詳細ページの追加**
+   - 動的ルーティング
+   - 個別の料理ページ
+
+2. **お気に入り機能**
+   - 状態管理
+   - ローカルストレージ
+
+3. **スタイリングの改善**
+   - CSS Modules
+   - Tailwind CSS
+
+4. **データフェッチング**
+   - API Routes
+   - 外部API連携
+
+## 🎯 まとめ
+
+このハンズオンでは、Next.js 15.3.4とReact 19を使った最小限の日本食紹介アプリを作成しました。
+
+**学んだこと**:
+- Next.js App Routerの基本構造
+- TypeScriptの基本的な型定義
+- React 19のコンポーネント作成
+- ファイルベースのルーティング
+
+**技術スタック**:
+- Next.js 15.3.4（最新版）
+- React 19（最新版）
+- TypeScript 5.x（最新版）
+- App Router（推奨方式）
+
+この基礎を元に、より複雑な機能を追加してNext.jsアプリケーションの開発スキルを向上させましょう！ 
